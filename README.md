@@ -10,6 +10,11 @@ are the data layer; headless Claude is the brain.** It screens; it never posts.
 > own logged-in session into a daily, screened brief — without you doomscrolling, and without
 > anything ever being posted on your behalf.
 
+![Example team slide — a daily AI-signal brief with the owner's comments rendered as callouts](assets/preview.png)
+
+_Example team slide (fictional data). Your personal digest is plain markdown; this
+self-contained HTML deck is the T+1 team view, with your comments quoted as callouts._
+
 ## What you get
 Two deliverables a day:
 - **`digests/<today>.md`** — a short, ranked markdown brief for *you* (top posts, ≤3 long reads,
