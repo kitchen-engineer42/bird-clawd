@@ -1,0 +1,29 @@
+/* Brand design tokens — NEUTRAL DEFAULT. Customize these to your own palette.
+   The slide step reads this file and locks the deck's :root colors to it, so every team
+   slide looks consistent. Swap the hex values for your brand and the decks follow. */
+:root {
+  /* Core */
+  --ink:    #16181D;  /* body + headings on light backgrounds */
+  --paper:  #FBFAF7;  /* page background (warm off-white) */
+  --line:   #E3E1DB;  /* hairlines, card borders */
+  --muted:  #6B7280;  /* captions, helper text */
+
+  /* Surfaces */
+  --surface:#FFFFFF;  /* cards */
+  --deep:   #1F2A37;  /* dark slides / hero panels */
+
+  /* Accents */
+  --accent:    #335C81;  /* primary accent (calm blue) — headings, key strokes */
+  --accent-2:  #B45309;  /* warm accent — callouts, comment bubbles */
+  --positive:  #3F7D58;  /* positive/"signal" tags */
+
+  /* Typography */
+  --font-sans: "Helvetica Neue", Arial, sans-serif;  /* fallback; slide step picks a display font */
+
+  /* Spacing (px) */
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+
+  /* Radius */
+  --radius-sm: 4px; --radius-md: 8px; --radius-lg: 16px; --radius-pill: 999px;
+}

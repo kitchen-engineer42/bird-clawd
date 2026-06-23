@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Signal — 2026-01-15 · Internal team brief (example)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap">
+<style>
+/* === THEME — NEUTRAL DEFAULT palette (mirrors templates/brand/tokens.css) === */
+:root{
+  --ink:#16181D; --paper:#FBFAF7; --line:#E3E1DB; --muted:#6B7280;
+  --surface:#FFFFFF; --deep:#1F2A37;
+  --accent:#335C81; --accent-2:#B45309; --positive:#3F7D58;
+  --bubble:#FBEFE2;                 /* light amber tint for comment callouts */
+  --stage-bg:#11161C; --slide-bg:var(--paper);
+  --font-display:"Fraunces",Georgia,serif;
+  --font-body:"Hanken Grotesk","Helvetica Neue",Arial,sans-serif;
+  --font-mono:"Space Mono",ui-monospace,Menlo,monospace;
+  --pad:96px; --gap:26px; --r-lg:16px; --r-pill:999px; --ease:cubic-bezier(.16,1,.3,1); --dur:.6s;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+/* === viewport-base.css (full) === */
+html,body{width:100%;height:100%;margin:0;overflow:hidden;background:var(--stage-bg,#000);}
+.deck-viewport{position:fixed;inset:0;overflow:hidden;background:var(--stage-bg,#000);}
+.deck-stage{position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:hidden;transform-origin:0 0;background:var(--slide-bg,#fff);}
+.slide{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;display:block;visibility:hidden;opacity:0;pointer-events:none;background:var(--slide-bg,#fff);}
+.slide.active,.slide.visible{visibility:visible;opacity:1;pointer-events:auto;z-index:1;}
+img,video,canvas,svg{max-width:100%;max-height:100%;}
+.deck-controls{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:1000;}
+@media print{html,body{width:1920px;height:auto;overflow:visible;background:#fff;}.deck-viewport{position:static;overflow:visible;background:#fff;}.deck-stage{position:static;width:auto;height:auto;transform:none!important;background:none;}.slide{position:relative;display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;width:1920px;height:1080px;break-after:page;page-break-after:always;}.slide:last-child{break-after:auto;page-break-after:auto;}.deck-controls{display:none!important;}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.2s!important;}}
+/* === reveal === */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease);}
+.slide.visible .reveal{opacity:1;transform:translateY(0);}
+.slide.visible .reveal:nth-child(1){transition-delay:.08s;}
+.slide.visible .reveal:nth-child(2){transition-delay:.16s;}
+.slide.visible .reveal:nth-child(3){transition-delay:.24s;}
+.slide.visible .reveal:nth-child(4){transition-delay:.32s;}
+/* === frame === */
+.slide{font-family:var(--font-body);color:var(--ink);}
+.frame{position:absolute;inset:0;padding:var(--pad);display:flex;flex-direction:column;}
+.kicker{font-family:var(--font-mono);font-size:22px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-2);}
+.slide-title{font-family:var(--font-display);font-weight:600;font-size:60px;line-height:1.04;color:var(--ink);margin-top:10px;}
+.rule{width:96px;height:5px;background:var(--accent);border-radius:var(--r-pill);margin:20px 0 26px;}
+.runfoot{position:absolute;left:var(--pad);bottom:46px;font-family:var(--font-mono);font-size:18px;color:var(--muted);}
+.runfoot b{color:var(--accent);}
+.pageno{position:absolute;right:var(--pad);bottom:46px;font-family:var(--font-mono);font-size:18px;color:var(--muted);}
+/* === title === */
+.title-slide .frame{justify-content:center;}
+.title-watermark{position:absolute;right:-40px;top:60px;font-family:var(--font-display);font-weight:700;font-size:300px;line-height:1;color:var(--ink);opacity:.05;letter-spacing:-.04em;}
+.t-kicker{font-family:var(--font-mono);font-size:26px;letter-spacing:.3em;text-transform:uppercase;color:var(--accent-2);}
+.t-title{font-family:var(--font-display);font-weight:600;font-size:132px;line-height:.98;color:var(--ink);margin:18px 0 6px;letter-spacing:-.01em;}
+.t-date{font-family:var(--font-mono);font-size:40px;color:var(--accent);}
+.t-sub{font-size:34px;color:var(--ink);margin-top:26px;max-width:1120px;}
+.t-marks{position:absolute;left:var(--pad);bottom:64px;display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+.mark{font-family:var(--font-mono);font-size:17px;letter-spacing:.06em;padding:9px 16px;border-radius:var(--r-pill);}
+.mark.internal{background:var(--deep);color:var(--paper);}
+.mark.example{background:transparent;color:var(--muted);border:1px dashed var(--muted);}
+/* === editor note === */
+.note-wrap{flex:1;display:flex;flex-direction:column;justify-content:center;gap:28px;}
+.editor-note{background:var(--deep);color:var(--paper);border-radius:var(--r-lg);padding:48px 60px;position:relative;}
+.editor-note .qmark{font-family:var(--font-display);font-size:150px;line-height:.5;color:var(--accent-2);position:absolute;top:42px;left:34px;}
+.editor-note p{font-family:var(--font-display);font-style:italic;font-size:40px;line-height:1.32;padding-left:96px;}
+.editor-note .byline{font-family:var(--font-mono);font-size:21px;color:#C7B8A6;padding-left:96px;margin-top:22px;}
+/* === cards === */
+.cards{display:flex;flex-direction:column;gap:var(--gap);flex:1;}
+.card{background:var(--surface);border-radius:var(--r-lg);padding:30px 38px;box-shadow:0 10px 30px rgba(22,24,29,.06);border-left:6px solid var(--accent);}
+.card.signal{border-left-color:var(--positive);}
+.card-head{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;}
+.card-rank{font-family:var(--font-display);font-weight:700;font-size:38px;color:var(--accent-2);line-height:1;}
+.card-topic{font-family:var(--font-display);font-weight:600;font-size:30px;color:var(--ink);line-height:1.1;flex:1;}
+.handle{font-family:var(--font-mono);font-size:19px;color:var(--accent);}
+.card-brief{font-size:23px;line-height:1.38;color:var(--ink);margin-top:10px;}
+.card-link{font-family:var(--font-mono);font-size:17px;color:var(--accent-2);margin-top:12px;display:inline-block;text-decoration:none;border-bottom:2px solid var(--bubble);}
+/* === comment bubble === */
+.bubble{background:var(--bubble);border-left:6px solid var(--accent-2);border-radius:0 var(--r-lg) var(--r-lg) 0;padding:18px 28px;margin-top:14px;}
+.bubble .who{font-family:var(--font-mono);font-size:16px;color:var(--accent-2);font-weight:700;display:flex;align-items:center;gap:10px;}
+.bubble .who .chip{background:var(--accent-2);color:var(--paper);border-radius:var(--r-pill);padding:2px 11px;font-size:13px;}
+.bubble p{font-family:var(--font-display);font-style:italic;font-size:23px;line-height:1.3;color:#4A2E12;margin-top:6px;}
+/* === long reads === */
+.lr-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--gap);flex:1;}
+.lr-card{background:var(--deep);color:var(--paper);border-radius:var(--r-lg);padding:36px;display:flex;flex-direction:column;}
+.lr-kicker{font-family:var(--font-mono);font-size:16px;letter-spacing:.16em;color:#C7B8A6;text-transform:uppercase;}
+.lr-title{font-family:var(--font-display);font-weight:600;font-size:30px;line-height:1.12;margin:14px 0 12px;}
+.lr-brief{font-size:21px;line-height:1.4;color:#D7DBE0;flex:1;}
+.lr-meta{font-family:var(--font-mono);font-size:16px;color:#9BB0C4;margin-top:18px;}
+/* === follows === */
+.follows{display:flex;flex-direction:column;gap:20px;flex:1;justify-content:center;}
+.follow-row{display:flex;align-items:baseline;gap:26px;padding:20px 0;border-bottom:2px solid var(--line);}
+.follow-h{font-family:var(--font-mono);font-weight:700;font-size:30px;color:var(--accent);min-width:320px;}
+.follow-why{font-size:24px;color:var(--ink);}
+/* === closing === */
+.closing .frame{justify-content:center;align-items:flex-start;}
+.close-mark{font-family:var(--font-mono);font-size:22px;letter-spacing:.3em;text-transform:uppercase;color:var(--accent-2);}
+.close-title{font-family:var(--font-display);font-weight:600;font-size:84px;color:var(--ink);line-height:1.02;margin:18px 0 26px;}
+.close-watch{font-size:30px;color:var(--ink);max-width:1300px;line-height:1.4;}
+.close-foot{position:absolute;left:var(--pad);bottom:64px;font-family:var(--font-mono);font-size:18px;color:var(--muted);}
+.deck-controls{font-family:var(--font-mono);font-size:15px;color:var(--paper);background:rgba(31,42,55,.8);padding:7px 16px;border-radius:var(--r-pill);letter-spacing:.08em;}
+</style>
+</head>
+<body>
+<div class="deck-viewport">
+  <main class="deck-stage" id="deckStage">
+
+    <section class="slide title-slide active">
+      <div class="title-watermark">AI</div>
+      <div class="frame">
+        <div class="t-kicker reveal">daily brief</div>
+        <h1 class="t-title reveal">AI&nbsp;Signal</h1>
+        <div class="t-date reveal">2026-01-15</div>
+        <p class="t-sub reveal">Internal team brief — yesterday's screened signal, with commentary. Source &amp; truth over opinion; the slop is already filtered out.</p>
+      </div>
+      <div class="t-marks">
+        <span class="mark internal reveal">Internal — not for external distribution</span>
+        <span class="mark example reveal">Example · fictional sample data</span>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="frame">
+        <div class="kicker reveal">Editor's note</div><div class="rule reveal"></div>
+        <div class="note-wrap"><div class="editor-note reveal">
+          <span class="qmark">&ldquo;</span>
+          <p>Bias toward inference/serving and real agent-stack breakdowns. Cut the consumer-founder noise. Source over hot takes, always.</p>
+          <div class="byline">— the owner's daily steer</div>
+        </div></div>
+      </div>
+      <div class="runfoot"><b>ai-signal</b> · internal brief</div><div class="pageno">02</div>
+    </section>
+
+    <section class="slide">
+      <div class="frame">
+        <div class="kicker reveal">Top posts · 1–2 of 6</div><h2 class="slide-title reveal">What moved</h2><div class="rule reveal"></div>
+        <div class="cards">
+          <div class="card signal reveal">
+            <div class="card-head"><span class="card-rank">1</span><span class="card-topic">Tessera runtime ships paged KV-cache quantization (NVFP4)</span><span class="handle">@kvcache_io</span></div>
+            <p class="card-brief">"The runtime lead, not a model drop." Quantized KV-cache for consumer GPUs; benchmark harness published, so the throughput claim is checkable.</p>
+            <a class="card-link" href="https://x.com/kvcache_io/status/1000000000000000001">x.com/kvcache_io →</a>
+            <div class="bubble"><div class="who">owner <span class="chip">internal</span></div><p>Runtime wins matter more to us than another model topping a leaderboard. This is the lane.</p></div>
+          </div>
+          <div class="card signal reveal">
+            <div class="card-head"><span class="card-rank">2</span><span class="card-topic">A production agent stack, layer by layer</span><span class="handle">@harness_lab</span></div>
+            <p class="card-brief">Eval loop, agent harness + compaction, post-trained base model — a concrete "here's our actual stack," not "wrap an API."</p>
+            <a class="card-link" href="https://x.com/harness_lab/status/1000000000000000002">x.com/harness_lab →</a>
+            <div class="bubble"><div class="who">owner <span class="chip">internal</span></div><p>Exactly what I want more of — eval-loop / harness / compaction broken down.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="runfoot"><b>ai-signal</b> · internal brief</div><div class="pageno">03</div>
+    </section>
+
+    <section class="slide">
+      <div class="frame">
+        <div class="kicker reveal">Top posts · 3–4 of 6</div><h2 class="slide-title reveal">What moved</h2><div class="rule reveal"></div>
+        <div class="cards">
+          <div class="card reveal">
+            <div class="card-head"><span class="card-rank">3</span><span class="card-topic">Benchmarking LLM serving across accelerator backends</span><span class="handle">@serving_notes</span></div>
+            <p class="card-brief">Portability numbers moving a workload between backends; reproducible scripts attached.</p>
+            <a class="card-link" href="https://x.com/serving_notes/status/1000000000000000003">x.com/serving_notes →</a>
+          </div>
+          <div class="card reveal">
+            <div class="card-head"><span class="card-rank">4</span><span class="card-topic">Lumen-2 open weights: ~1/5 the cost, LongTask-Bench 61</span><span class="handle">NorthLab</span></div>
+            <p class="card-brief">Kept for its real cost + coverage numbers. Reframed: leading with cost and the coding-agent figure, not the leaderboard-Elo framing.</p>
+            <a class="card-link" href="https://example.com/northlab/lumen-2">example.com/northlab →</a>
+            <div class="bubble"><div class="who">owner <span class="chip">internal</span></div><p>Demote the leaderboard framing — keep it only because the cost number is real.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="runfoot"><b>ai-signal</b> · internal brief</div><div class="pageno">04</div>
+    </section>
+
+    <section class="slide">
+      <div class="frame">
+        <div class="kicker reveal">Top posts · 5–6 of 6</div><h2 class="slide-title reveal">What moved</h2><div class="rule reveal"></div>
+        <div class="cards">
+          <div class="card signal reveal">
+            <div class="card-head"><span class="card-rank">5</span><span class="card-topic">Verification is the bottleneck once agents write most of the code</span><span class="handle">@evalcrafter</span></div>
+            <p class="card-brief">Postmortem: review/verification, not generation, became the constraint at scale — with a detection + rollback playbook.</p>
+            <a class="card-link" href="https://x.com/evalcrafter/status/1000000000000000005">x.com/evalcrafter →</a>
+          </div>
+          <div class="card reveal">
+            <div class="card-head"><span class="card-rank">6</span><span class="card-topic">Ranking models by unique users, not token volume</span><span class="handle">@latentloop</span></div>
+            <p class="card-brief">Token-heavy models skew usage leaderboards; unique-user ranking is the more honest metric.</p>
+            <a class="card-link" href="https://x.com/latentloop/status/1000000000000000006">x.com/latentloop →</a>
+          </div>
+        </div>
+      </div>
+      <div class="runfoot"><b>ai-signal</b> · internal brief</div><div class="pageno">05</div>
+    </section>
+
+    <section class="slide">
+      <div class="frame">
+        <div class="kicker reveal">Long reads · 3</div><h2 class="slide-title reveal">Worth a real sit-down</h2><div class="rule reveal"></div>
+        <div class="lr-grid">
+          <div class="lr-card reveal"><div class="lr-kicker">Eng · economics</div><div class="lr-title">The unit economics of LLM inference in 2026</div><p class="lr-brief">Token cost from GPU-hour to per-request; cache hit-rate and batching as the dominant levers.</p><div class="lr-meta">example.com</div></div>
+          <div class="lr-card reveal"><div class="lr-kicker">Research</div><div class="lr-title">Calibrated retrieval beats bigger context</div><p class="lr-brief">A tuned retriever + 32k beats naive 1M-context on accuracy and cost. Honest ablations.</p><div class="lr-meta">preprint</div></div>
+          <div class="lr-card reveal"><div class="lr-kicker">Practice</div><div class="lr-title">What a real agent harness looks like</div><p class="lr-brief">Thin orchestrator, fat tools, deterministic replay — and where frameworks overbuild.</p><div class="lr-meta">example.com</div></div>
+        </div>
+      </div>
+      <div class="runfoot"><b>ai-signal</b> · internal brief</div><div class="pageno">06</div>
+    </section>
+
+    <section class="slide">
+      <div class="frame">
+        <div class="kicker reveal">Suggested follows</div><h2 class="slide-title reveal">Accounts worth adding</h2><div class="rule reveal"></div>
+        <div class="follows">
+          <div class="follow-row reveal"><div class="follow-h">@harness_lab</div><div class="follow-why">Ships real production agent stacks; eval-loop + harness depth, not hype.</div></div>
+          <div class="follow-row reveal"><div class="follow-h">@kvcache_io</div><div class="follow-why">Inference/runtime leads — KV-cache, quantization, serving PRs.</div></div>
+          <div class="follow-row reveal"><div class="follow-h">@serving_notes</div><div class="follow-why">Cross-backend serving benchmarks; systems-level depth.</div></div>
+        </div>
+      </div>
+      <div class="runfoot"><b>ai-signal</b> · internal brief</div><div class="pageno">07</div>
+    </section>
+
+    <section class="slide closing">
+      <div class="frame">
+        <div class="close-mark reveal">what to watch</div>
+        <h2 class="close-title reveal">Does the runtime<br>cost win hold up?</h2>
+        <p class="close-watch reveal">Watch for an independent rerun of the Tessera KV-cache numbers on a different workload. If it holds, it's the headline. If not, we say so first.</p>
+      </div>
+      <div class="close-foot">ai-signal · 2026-01-15 · internal — not for external distribution · example data</div>
+    </section>
+
+  </main>
+</div>
+<div class="deck-controls" id="deckControls">01 / 08 · ← → to move</div>
+<script>
+class SlidePresentation{
+  constructor(){this.slides=Array.from(document.querySelectorAll('.slide'));this.stage=document.getElementById('deckStage');this.counter=document.getElementById('deckControls');this.current=0;this.wheelLock=false;this.scale();this.keys();this.wheel();this.touch();this.show(0);window.addEventListener('resize',()=>this.scale());}
+  scale(){const f=Math.min(window.innerWidth/1920,window.innerHeight/1080);const x=(window.innerWidth-1920*f)/2;const y=(window.innerHeight-1080*f)/2;this.stage.style.transform=`translate(${x}px,${y}px) scale(${f})`;}
+  keys(){document.addEventListener('keydown',e=>{switch(e.key){case'ArrowRight':case' ':case'PageDown':e.preventDefault();this.next();break;case'ArrowLeft':case'PageUp':e.preventDefault();this.prev();break;case'Home':e.preventDefault();this.show(0);break;case'End':e.preventDefault();this.show(this.slides.length-1);break;}});}
+  wheel(){window.addEventListener('wheel',e=>{if(this.wheelLock||Math.abs(e.deltaY)<24)return;this.wheelLock=true;e.deltaY>0?this.next():this.prev();setTimeout(()=>this.wheelLock=false,700);},{passive:true});}
+  touch(){let sx=0;window.addEventListener('touchstart',e=>sx=e.changedTouches[0].clientX,{passive:true});window.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>60)dx<0?this.next():this.prev();},{passive:true});}
+  next(){this.show(this.current+1);}prev(){this.show(this.current-1);}
+  show(i){this.current=Math.max(0,Math.min(i,this.slides.length-1));this.slides.forEach((s,idx)=>{const on=idx===this.current;s.classList.toggle('active',on);s.classList.toggle('visible',on);});const n=String(this.current+1).padStart(2,'0');const t=String(this.slides.length).padStart(2,'0');this.counter.textContent=`${n} / ${t} · ← → to move`;}
+}
+new SlidePresentation();
+</script>
+</body>
+</html>

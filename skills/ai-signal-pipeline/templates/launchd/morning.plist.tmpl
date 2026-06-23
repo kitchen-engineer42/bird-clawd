@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Template: replace __PIPELINE_ROOT__ with the absolute project root (e.g. /Users/you/ai-signal).
+     Adjust Hour/Minute for your morning run time. Install to ~/Library/LaunchAgents/sh.ai-signal.morning.plist
+     then: launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/sh.ai-signal.morning.plist -->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>sh.ai-signal.morning</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/zsh</string>
+        <string>__PIPELINE_ROOT__/bin/morning.sh</string>
+    </array>
+    <!-- Fires daily. If the Mac was asleep, launchd runs it once on the next wake.
+         For weekdays only, replace this dict with five, each adding <key>Weekday</key><integer>1..5</integer>. -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key><integer>7</integer>
+        <key>Minute</key><integer>0</integer>
+    </dict>
+    <key>RunAtLoad</key>
+    <false/>
+    <key>StandardOutPath</key>
+    <string>__PIPELINE_ROOT__/logs/morning.out</string>
+    <key>StandardErrorPath</key>
+    <string>__PIPELINE_ROOT__/logs/morning.err</string>
+</dict>
+</plist>

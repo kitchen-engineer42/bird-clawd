@@ -1,0 +1,39 @@
+{
+  "$comment": "Scoped permissions for the unattended headless runs. READ-ONLY by design: the full bird READ toolset is allowed (search/news/list-timeline/user-tweets/home/likes/etc.), while every bird WRITE command (tweet, reply, follow, unfollow, unbookmark) is blocked. Writes are blocked two ways: (a) omitted from the allow-list, so in headless -p they're denied by default; (b) the collision-free ones are also denied explicitly. So these runs physically cannot post or mutate anything on X. File writes are auto-approved via --permission-mode acceptEdits in the wrappers. NOTE: `bird follow`/`bird reply` are intentionally NOT in deny — a naive prefix-deny could also block the read commands `followers`/`following`/`replies`; omission already blocks them safely. Copy this to <PROJECT_ROOT>/.claude/settings.json.",
+  "permissions": {
+    "allow": [
+      "Bash(birdclaw:*)",
+      "Bash(bird whoami:*)",
+      "Bash(bird check:*)",
+      "Bash(bird query-ids:*)",
+      "Bash(bird home:*)",
+      "Bash(bird search:*)",
+      "Bash(bird news:*)",
+      "Bash(bird trending:*)",
+      "Bash(bird user-tweets:*)",
+      "Bash(bird likes:*)",
+      "Bash(bird bookmarks:*)",
+      "Bash(bird mentions:*)",
+      "Bash(bird lists:*)",
+      "Bash(bird list-timeline:*)",
+      "Bash(bird following:*)",
+      "Bash(bird followers:*)",
+      "Bash(bird thread:*)",
+      "Bash(bird read:*)",
+      "Bash(bird replies:*)",
+      "Bash(bird about:*)",
+      "Read",
+      "Write",
+      "WebSearch",
+      "WebFetch"
+    ],
+    "deny": [
+      "Bash(bird tweet:*)",
+      "Bash(bird unfollow:*)",
+      "Bash(bird unbookmark:*)",
+      "Bash(rm:*)",
+      "Bash(curl:*)",
+      "Bash(git push:*)"
+    ]
+  }
+}

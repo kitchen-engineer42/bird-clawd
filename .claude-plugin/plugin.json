@@ -1,0 +1,14 @@
+{
+  "name": "ai-signal-pipeline",
+  "version": "0.1.0",
+  "description": "Build a local, read-only daily AI/LLM screening pipeline for X/Twitter: birdclaw + bird are the data layer, headless Claude is the brain. Produces a personal markdown digest and a self-contained HTML team slide, learns from your comments, and runs unattended via launchd. Screens, never posts.",
+  "skills": "./skills/",
+  "author": {
+    "name": "kitchen-engineer42",
+    "url": "https://github.com/kitchen-engineer42"
+  },
+  "homepage": "https://github.com/kitchen-engineer42/bird-clawd",
+  "repository": "https://github.com/kitchen-engineer42/bird-clawd",
+  "license": "MIT",
+  "keywords": ["twitter", "x", "ai", "llm", "screening", "digest", "birdclaw", "launchd", "read-only", "agent"]
+}

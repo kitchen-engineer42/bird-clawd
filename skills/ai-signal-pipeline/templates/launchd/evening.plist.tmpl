@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Template: replace __PIPELINE_ROOT__ with the absolute project root.
+     Adjust Hour/Minute for your evening run time. Install to ~/Library/LaunchAgents/sh.ai-signal.evening.plist
+     then: launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/sh.ai-signal.evening.plist -->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>sh.ai-signal.evening</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/zsh</string>
+        <string>__PIPELINE_ROOT__/bin/evening.sh</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key><integer>17</integer>
+        <key>Minute</key><integer>30</integer>
+    </dict>
+    <key>RunAtLoad</key>
+    <false/>
+    <key>StandardOutPath</key>
+    <string>__PIPELINE_ROOT__/logs/evening.out</string>
+    <key>StandardErrorPath</key>
+    <string>__PIPELINE_ROOT__/logs/evening.err</string>
+</dict>
+</plist>

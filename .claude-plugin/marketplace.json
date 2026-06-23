@@ -1,0 +1,18 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "bird-clawd",
+  "description": "A read-only daily AI/LLM signal-screening pipeline for X/Twitter, built on birdclaw + bird with headless Claude as the brain.",
+  "owner": {
+    "name": "kitchen-engineer42",
+    "url": "https://github.com/kitchen-engineer42"
+  },
+  "plugins": [
+    {
+      "name": "ai-signal-pipeline",
+      "source": "./",
+      "description": "Scaffolds a local, unattended, read-only pipeline that screens X for genuine production-grade AI/LLM developments: a personal markdown digest + a team HTML slide, learning from your comments. Screens, never posts.",
+      "category": "productivity",
+      "tags": ["twitter", "x", "ai", "llm", "screening", "digest", "launchd", "read-only"]
+    }
+  ]
+}
