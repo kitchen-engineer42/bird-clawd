@@ -24,6 +24,7 @@ describe it. Ask the few questions in Step 4, then proceed.
 ```
 $PIPELINE_ROOT/
 ├── bin/{morning,evening}.sh     # launchd wrappers (sync → claude -p → notify)
+├── bin/deck2png.sh              # render the team slide → one tall scrolling PNG (phone/chat)
 ├── prompts/{morning,evening,slide,taste-update}.md
 ├── .claude/settings.json        # READ-ONLY permission model (writes to X blocked)
 ├── config.env                   # X_HANDLE
@@ -33,8 +34,9 @@ $PIPELINE_ROOT/
 └── digests/ slides/ reviews/ comments/ data/ logs/
 ```
 Morning (default 07:00): sync → ingest comments → conservative taste-update → build YESTERDAY's
-team slide → screen TODAY → write `digests/<today>.md`. Evening (17:30): review the user's X
-activity + a comment slot. The user's comments next morning tune taste AND get quoted in the slide.
+team slide (+ a tall scrolling PNG via `deck2png.sh`, phone/chat-friendly) → screen TODAY → write
+`digests/<today>.md`. Evening (17:30): review the user's X activity + a comment slot. The user's
+comments next morning tune taste AND get quoted in the slide.
 
 ## The read-only promise (state this to the user up front)
 The pipeline reads the user's X session **cookies locally** via `bird` (graphql). `.claude/settings.json`
@@ -73,7 +75,7 @@ Ask the user (use a structured question UI if available):
 3. **Focus areas / run times** — defaults are fine (production AI/LLM; 07:00 / 17:30).
 
 Then scaffold from this skill's `templates/`:
-- Copy [templates/bin/morning.sh](templates/bin/morning.sh) and [templates/bin/evening.sh](templates/bin/evening.sh) → `$PIPELINE_ROOT/bin/` (`chmod +x`). They self-locate their root; no path edits needed.
+- Copy [templates/bin/morning.sh](templates/bin/morning.sh), [templates/bin/evening.sh](templates/bin/evening.sh), and [templates/bin/deck2png.sh](templates/bin/deck2png.sh) → `$PIPELINE_ROOT/bin/` (`chmod +x`). They self-locate their root; no path edits needed.
 - Copy the four [templates/prompts/](templates/prompts/) files → `$PIPELINE_ROOT/prompts/`.
 - Copy [templates/settings.json](templates/settings.json) → `$PIPELINE_ROOT/.claude/settings.json`.
 - Copy [templates/taste.md](templates/taste.md) → `$PIPELINE_ROOT/taste.md` and [templates/brand/tokens.css](templates/brand/tokens.css) → `$PIPELINE_ROOT/brand/tokens.css`.

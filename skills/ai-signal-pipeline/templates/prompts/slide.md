@@ -37,13 +37,19 @@ This is READ by a team on a screen — comfortable, not cramped:
 ## Step 4 — Gather + ground the content
 - Items: the **Top posts and Long reads** in `$ROOT/digests/<YESTERDAY>.md` (NOT suggested follows).
   If it doesn't exist, write nothing and exit.
-- Per-item comments: the inline `💬` lines under each item → render as a distinct comment callout in
-  an accent color, verbatim, clearly the owner's voice, visually separate from the neutral content.
-  Items with no comment just show the content. Drop any meta/process comment.
+- Per-item comments: the inline `💬` lines under each item → render as a distinct comment callout,
+  verbatim, clearly the owner's voice, visually separate from the neutral content. Default to a
+  CALM accent (a light/secondary brand color) so long comments stay readable; RESERVE the strongest
+  accent for comments flagged important (the `💬` line starts with `!`/`‼️`) — the loud color is for
+  the 1–2 that matter per day, not every comment. Drop any meta/process comment.
 - **Ground each item in its SOURCE — do NOT parrot.** WebFetch each link and read enough of the
   source to convey real substance (the brief is a pointer); if unreachable, say so rather than
   inventing. Frame the item from the source; the take sits alongside, never as the slide's own
   understanding.
+- **Clickable jump-to-source (REQUIRED).** Every item MUST carry a real link to its source:
+  `<a href="<full https URL>" target="_blank" rel="noopener">…↗</a>`, in an accent color with a ↗
+  glyph. The `href` is the FULL canonical URL — the `<url>` line under that item in the digest —
+  even if the visible text is shortened. The team must be able to tap through; NO bare-text URLs.
 
 ## Step 5 — Deck structure
 1. **Title:** the deck name in ONE consistent display font — the name alone is the brand; no
@@ -56,7 +62,20 @@ This is READ by a team on a screen — comfortable, not cramped:
 **Layout safety:** the kicker / title / source line must NEVER overlap the content. Use normal
 top-down flow; on any flex region that vertically centers content, use `justify-content: safe center`
 (not plain `center`) so a two-line headline can't push centered content up into the header.
+**Fit the stage (no bottom overflow):** every slide must fit ENTIRELY within the 1920×1080 stage —
+nothing crosses the bottom edge. If content would overflow, shrink that slide's type a notch and
+tighten gaps until it fits, or move a comment onto its own slide.
 Never overflow a slide — split into more slides instead.
+
+## Visual conventions (LIGHT starting point — refine over your first week)
+Patterns that read well. Follow loosely and VARY — don't reproduce identical slides; a floor,
+not a mold. Review the output and tune to taste.
+- **Top bar** per content slide: a kicker left ("Top post N · <tag>" / "Long read · <tag>") + a
+  slide index "N / <total>" right; a thin rule under it.
+- **Headline** in the display font; **source line** under it carrying the clickable jump-to-source link.
+- **Body:** 1–2 items. Data-heavy items → a row of big **stat cards** (figure + label); otherwise
+  a left **content column** + right **comment column(s)**.
+- **Footer:** small "<deck name> · <date>". **Closing:** deck name + a one-line "what to watch".
 
 ## Step 6 — Write the file
 Single self-contained `.html`, ALL CSS/JS inline, full `viewport-base.css`, relative links,

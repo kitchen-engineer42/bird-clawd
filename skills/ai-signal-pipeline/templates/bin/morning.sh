@@ -39,6 +39,11 @@ bird following --all --max-pages 8 --json > "$ROOT/data/following.json" 2>> "$LO
 if [ -f "$ROOT/digests/$YESTERDAY.md" ]; then
   run_claude "$ROOT/prompts/taste-update.md" >> "$LOG/morning.log" 2>> "$LOG/morning.err"
   run_claude "$ROOT/prompts/slide.md"         >> "$LOG/morning.log" 2>> "$LOG/morning.err"
+  # Render the team slide into a tall scrolling PNG (phone/chat friendly). Tolerant.
+  if [ -f "$ROOT/slides/$YESTERDAY.html" ]; then
+    "$ROOT/bin/deck2png.sh" "$ROOT/slides/$YESTERDAY.html" "$ROOT/slides/$YESTERDAY.png" 1920 \
+      >> "$LOG/morning.log" 2>&1 || echo "(deck2png failed; html slide still available)" >> "$LOG/morning.log"
+  fi
 else
   echo "(no digests/$YESTERDAY.md — skipping taste-update + slide on first run)" >> "$LOG/morning.log"
 fi
