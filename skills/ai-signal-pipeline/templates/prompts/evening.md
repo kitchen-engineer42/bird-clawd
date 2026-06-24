@@ -47,7 +47,7 @@ flag at most 1–2 things; "Nothing to flag" is fine. If NO brand guide is confi
 - @<handle> — <why>  (or "none today")
 
 ## YOUR COMMENTS (fill in anytime — tomorrow this tunes taste AND can be quoted in the team slide)
-<!-- One of several places you can comment (the digest's "My comments" block and
+<!-- One of several places you can comment (the digest's per-item 💬 lines and
      comments/<date>.md are the others). Candid/internal is fine — never posted to X. -->
 > 
 ```

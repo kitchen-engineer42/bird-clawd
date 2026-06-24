@@ -27,11 +27,12 @@ degrades gracefully offline after emailing.
 ## Step 3 — Gather yesterday's content + comments
 - Source: `$ROOT/digests/<YESTERDAY>.md`. If it doesn't exist, write nothing and exit.
 - Comments (quote VERBATIM — candid/internal is fine; this deck is internal):
-  - the "## My comments" block in `$ROOT/digests/<YESTERDAY>.md`
-  - the "YOUR COMMENTS" block in `$ROOT/reviews/review-<YESTERDAY>.md`
-  - `$ROOT/comments/<YESTERDAY>.md` (if present)
-  Attach comments to specific items when an item number/author is referenced; else treat as an
-  overall editor's note.
+  - the inline `💬` lines under each Top post / Long read in `$ROOT/digests/<YESTERDAY>.md`. A
+    `💬` line with text is the owner's comment ON that item — render it as the comment bubble on
+    that item's card. An empty `💬 ` line = no comment for that item.
+  - the "YOUR COMMENTS" block in `$ROOT/reviews/review-<YESTERDAY>.md` and
+    `$ROOT/comments/<YESTERDAY>.md` (if present) — overall/extra notes; use the strongest as the
+    editor's-note slide.
 
 ## Step 4 — Deck structure (high-density reading deck)
 1. **Title:** "AI Signal — <YESTERDAY>", subtitle "Internal team brief". Small mark: "Internal —

@@ -45,17 +45,24 @@ clear the bar, return fewer — NEVER pad with slop. Use exactly this shape:
 # AI Signal — <YYYY-MM-DD>
 
 _Screened against taste.md · source & truth over opinion · caps 10 posts / 3 long reads._
+_💬 Add your take on the 💬 line under any item — candid/internal is fine, never posted to X. Next morning these tune the taste AND get quoted as bubbles in the team slide._
 
 ## Top posts (<n>/10)
 1. **<one-line topic>** — @<author>
    <1–2 line brief: what is actually new/important, why it clears the bar>
    <url>
+   💬 
+2. **<topic>** — @<author>
+   <brief>
+   <url>
+   💬 
 ...
 
 ## Long reads (<n>/3)
 - **<title>** — <source/author>
   <1–2 line why it's worth the time>
   <url>
+  💬 
 
 ## Suggested follows
 - @<handle> — <why they're repeatedly high-signal; topic>
@@ -63,14 +70,9 @@ _Screened against taste.md · source & truth over opinion · caps 10 posts / 3 l
 ## Note
 <1 line: what shaped today's picks; any taste nudge applied earlier today; weekly self-audit
 note if it's that day>
-
----
-## My comments
-<!-- Jot your take on today's items here anytime — candid/internal is fine, this never gets
-     posted to X. Next morning these (a) tune the taste and (b) get quoted in the team slide.
-     Reference an item by its number, e.g. "3: this is the real signal this week". -->
 ```
 
-Leave the "My comments" block empty (just the placeholder) for the owner to fill during the day.
-Briefs are 1–2 lines, no fluff; every item needs a working link; the whole digest reads in a
-couple of minutes. End after writing the file.
+Put an EMPTY `💬 ` line (just the emoji + a space) under EVERY Top post and Long read — that's
+where the owner comments per item during the day. Do NOT add a single trailing comment block;
+comments now live inline under each item. Briefs are 1–2 lines, no fluff; every item needs a
+working link; the whole digest reads in a couple of minutes. End after writing the file.

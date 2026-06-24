@@ -6,10 +6,11 @@ PROJECT ROOT: passed via --add-dir (referred to below as $ROOT). The wrapper app
 
 ## Step 1 — Gather yesterday's comments from EVERY surface
 Comments can be written "wherever fits," so check all of these for the YESTERDAY date:
-- `$ROOT/digests/<YESTERDAY>.md` — the "## My comments" block.
+- `$ROOT/digests/<YESTERDAY>.md` — the inline `💬` lines under each Top post / Long read. A `💬`
+  line with text after the emoji is a comment ON that item; an empty `💬 ` line means no comment.
 - `$ROOT/reviews/review-<YESTERDAY>.md` — the "YOUR COMMENTS" block.
 - `$ROOT/comments/<YESTERDAY>.md` — freeform drop file (may not exist).
-Read whichever exist. Treat empty/placeholder blocks as "no comment."
+Read whichever exist. Treat empty `💬 ` lines / placeholder blocks as "no comment."
 
 ## Step 2 — Separate screening signal from team-talk
 Comments can be candid, subjective, even aggressive — some are team-facing, not screening
