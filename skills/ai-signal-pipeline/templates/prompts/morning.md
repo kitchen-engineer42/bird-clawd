@@ -32,8 +32,10 @@ the day (a few well-chosen calls beat scraping everything):
 Favor primary sources; cross-check claims. From everything, select AT MOST 3 long reads.
 
 ## Step 4 — Suggested follows
-- Up to ~3 accounts that were repeatedly high-signal and that you don't already follow, each
-  with a one-line reason.
+- The accounts you ALREADY follow are dumped to `$ROOT/data/following.json` by the wrapper
+  (`bird following`). Read it and build the set of handles you follow.
+- Propose up to ~3 accounts that were repeatedly high-signal today AND are NOT in that set, each
+  with a one-line reason. If the file is missing/empty, say follows are inferred (can't exclude).
 
 ## Step 5 — Write the digest
 Write to `$ROOT/digests/<TODAY>.md` (TODAY = YYYY-MM-DD). Caps: 10 posts, 3 long reads. If fewer

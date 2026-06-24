@@ -11,7 +11,7 @@ ROOT="${0:A:h:h}"                       # this script lives at $ROOT/bin/morning
 LOG="$ROOT/logs"
 TODAY="$(date +%F)"
 YESTERDAY="$(date -v-1d +%F)"           # BSD/macOS date
-mkdir -p "$LOG" "$ROOT/digests" "$ROOT/slides" "$ROOT/comments"
+mkdir -p "$LOG" "$ROOT/digests" "$ROOT/slides" "$ROOT/comments" "$ROOT/data"
 
 echo "=== morning run $(date) (today=$TODAY yesterday=$YESTERDAY) ===" >> "$LOG/morning.log"
 
@@ -29,6 +29,11 @@ CONTEXT: today is $TODAY, yesterday is $YESTERDAY. Use these exact dates for <TO
   birdclaw sync timeline --mode bird --limit 200 --refresh
   birdclaw sync likes    --mode bird --limit 100 --refresh
 } >> "$LOG/morning.sync.log" 2>&1 || echo "(birdclaw sync non-zero; continuing)" >> "$LOG/morning.log"
+
+# Your follow graph (who you ALREADY follow) so suggested-follows can exclude them.
+# birdclaw's `sync following` is dry-run unless --yes; bird's `following` fetches it directly.
+bird following --all --max-pages 8 --json > "$ROOT/data/following.json" 2>> "$LOG/morning.sync.log" \
+  || echo "(bird following failed — suggested-follows will be inferred)" >> "$LOG/morning.log"
 
 # 2) taste-update + 3) yesterday's team slide — only if a yesterday digest exists.
 if [ -f "$ROOT/digests/$YESTERDAY.md" ]; then
